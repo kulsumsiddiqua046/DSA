@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+  int data;
+  struct node*next;
+};
+typedef struct node snode;
+snode*head=NULL;
+void createlist(int x)
+{
+  smode*newnode=(snode*)malloc(sizeof(snode));
+  newnode->data=x;
+  newnode->next=NULL;
+  head=newnode;
+}
+void appendnode(int x)
+{
+  snode*tempnode=head;
+  snode*newnode=NULL;
+  newnode=(snode*)malloc(sizeof(snode));
+  newnode->data=x;
+  newnode->next=NULL;
+  if (tempnode==NULL)
+  {
+     head=newnode;
+     return;
+  }
+  while(tempnode->next!=NULL)
+  {
+    tempnode=tempnode->next;
+  }
+ tempnode->next=newnode;
+ return;
+}
+void Insert(int x)  //Insert at beginning
+{
+  snode*newnode=(snode*)malloc(sizeof(snode));
+  newnode->data=x;
+  newnode->next=head;
+  head=newnode;
+}
+void deleteFirst()  
+{
+   if(head==NULL)
+  {
+    printf("list is already empty...\n");
+    return;
+   }
+  snode*tempnode=head; 
+  head=head->next;
+  free(tempnode);
+}
+void printlist(void)
+{
+  snode*tempnode=head;
+  if(tempnode==NULL)
+  {
+    printf("list is empty....\n");
+    return;
+  }
+ while(tempnode!=NULL)
+ {
+ printf("%d==>",tempnode->data);
+ tempnode=tempnode->next;
+ }
+ printf("NULL\n");
+ }
+int main()
+{
+createlist(10);
+printlist();
+appendnode(20);
+printlist();
+appendnode(30);
+printlist();
+Insert(40);
+printlist();
+deleteFirst();
+printlist();
+}
